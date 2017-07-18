@@ -1,29 +1,27 @@
 export const update = (value) => {
     return{
         type: 'UPDATE',
-        update: value,
+        update: value, //eat
     }
 }
 
-export const add = (update, id) => {
+export const add = (update) => {
     return{
         type: "ADD",
-        add: update,
-        id: 0
+        add: update //eat
     }
 }
 
-export const check = (value) => {
-    console.log("Checked " +value)
+export const strike = (value) => {
     return{
-        type: "CHECK",
-        check: value
+        type: "STRIKE",
+        strike: value
     }
 }
 
-export const del = (value) => {
+export const filter = (strike) => {
     return{
-        type: "DELETE",
-        del: value
+        type: "FILTER",
+        names: strike
     }
 }

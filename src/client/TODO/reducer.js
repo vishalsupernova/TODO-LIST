@@ -1,4 +1,4 @@
-const initialState = { update: '', Items: []}
+const initialState = { update: '', Items: [], Strikes: [], filters: []}
 
 function Todo(state = initialState, action) {
     
@@ -8,11 +8,13 @@ function Todo(state = initialState, action) {
         case 'ADD':
             let Items = state.Items.push(action.add)
             return{...state, Items: state.Items};
-        case 'CHECK': 
-            return{...state, checkItems: state.check}
-        case 'DELETE':
-            let filterItems = state.Items.splice((Items) => {return Items != (action.del)})
-            return{...state, Items: filterItems}
+        case 'STRIKE': 
+            let Strikes = state.Strikes.push(action.strike)
+            return{...state, Strikes: state.Strikes};
+        case 'FILTER':
+            console.log("NAMEEE " +action.names)
+            let filters = state.Items.find((Item) => {return Item != (action.names)})
+            return{...state, Items: state.filters}
         default:
             return state
     }
