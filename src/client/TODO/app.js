@@ -45,7 +45,7 @@ class App extends React.Component {
                 <button onClick={this.onAdd.bind(this)}>Add</button>
                 <button >Delete</button>
                 <ul >{this.props.addItems.map((addItem) => 
-                    {return <li onClick = {this.props.addItem} key={addItem}> <input type = "checkbox" /> {addItem} </li> })}
+                    {return <p onClick = {this.props.addItem} key={addItem}> <input type = "checkbox" /> {addItem} </p> })}
                 </ul>  
         </div>
     }
