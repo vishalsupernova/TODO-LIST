@@ -1,27 +1,38 @@
 export const update = (value) => {
-    return{
+    return {
         type: 'UPDATE',
         update: value, //eat
     }
 }
 
 export const add = (update) => {
-    return{
+    return {
         type: "ADD",
-        add: update //eat
+        add: update
     }
 }
 
+
 export const strike = (value) => {
-    return{
+    return {
         type: "STRIKE",
         strike: value
     }
 }
 
 export const filter = (strike) => {
-    return{
+    return {
         type: "FILTER",
         names: strike
+    }
+}
+
+export const complete = (value, boolean) => {
+    return {
+        type: "COMPLETE",
+        complete: {
+            name: value,
+            isComplete: false
+        }
     }
 }

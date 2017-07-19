@@ -1,16 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
-import { update } from './actions.js';
-import { add } from './actions.js';
-import { strike } from './actions.js';
-import { filter } from './actions.js'
+import { update, add, strike, filter, complete } from './actions.js';
+
 
 const mapStateToProps = function (state) {
     return {
         update: state.update,
         addItems: state.Items,
-        filter: state.Strikes
+        filter: state.Strikes,
+        complete: state.complete,
+        change: state.complete
     }
 }
 
@@ -22,7 +22,7 @@ class App extends React.Component {
     }
 
     onAdd(e) {
-        this.props.dispatch(add(this.props.update))
+        this.props.dispatch(add())
     }
 
     onStrike(e) {
@@ -30,25 +30,23 @@ class App extends React.Component {
         console.log("TOGGEEEL " + e.target.value)
     }
 
-    //     onAdd(e, value = 0){
-    //     this.props.dispatch({
-    //       type: 'ADD',
-    //       payload: this.props.update,
-    //       id: value++
-    //     })
-    //   }
     onFilter(e){
         this.props.dispatch(filter(this.props.filter))
     }
 
+    onComplete(e){
+        console.log("VALUE " +e.target.value)
+        this.props.dispatch(complete(e.target.value))
+    }
+
     render() {
         return <div>
-            <input type="text" onChange={this.update.bind(this)} />
+            <input type="text" value = {this.props.update} onChange={this.update.bind(this)} />
             <button onClick={this.onAdd.bind(this)}>Add</button>
             <button onClick={this.onFilter.bind(this)}>Delete</button>
             <ul >{this.props.addItems.map((addItem) => {
-                return <p onClick={this.props.addItem} key={addItem.id} >
-                    <input type="checkbox" value={addItem} onChange = {this.onStrike.bind(this)}/> {addItem} </p>
+                return <p onClick={this.props.addItem} key={addItem} >
+                    <input type="checkbox" value= {addItem} onChange = {this.onComplete.bind(this)} /> {addItem} </p>
             })}
             </ul>
         </div>
