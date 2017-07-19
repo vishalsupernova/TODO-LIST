@@ -12,27 +12,26 @@ export const add = (update) => {
     }
 }
 
+export const changeStatus = (value) => {
+    return{
+        type: "CHANGESTATUS",
+        changeStatus: value,
+    }
+}
+
+export const complete = (status) => {
+    return{
+        type: "COMPLETE",
+        status: status
+    }
+}
 
 export const strike = (value) => {
-    return {
+    return{
         type: "STRIKE",
-        strike: value
+        strike: value 
+        
     }
 }
 
-export const filter = (strike) => {
-    return {
-        type: "FILTER",
-        names: strike
-    }
-}
 
-export const complete = (value, boolean) => {
-    return {
-        type: "COMPLETE",
-        complete: {
-            name: value,
-            isComplete: false
-        }
-    }
-}

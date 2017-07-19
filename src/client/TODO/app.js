@@ -1,16 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
-import { update, add, strike, filter, complete } from './actions.js';
+import { update, add, strike, complete, changeStatus } from './actions.js';
 
 
 const mapStateToProps = function (state) {
     return {
         update: state.update,
         addItems: state.Items,
-        filter: state.Strikes,
-        complete: state.complete,
-        change: state.complete
+        change: state.complete,
+        status: state.status,
+        text: state.text,
+
     }
 }
 
@@ -22,32 +23,33 @@ class App extends React.Component {
     }
 
     onAdd(e) {
-        this.props.dispatch(add())
+        this.props.dispatch(add(this.props.update))
     }
 
-    onStrike(e) {
-        this.props.dispatch(strike(e.target.value))
-        console.log("TOGGEEEL " + e.target.value)
-    }
-
-    onFilter(e){
-        this.props.dispatch(filter(this.props.filter))
+    changeStatus(e){
+        console.log(e.target.value)
+        this.props.dispatch(changeStatus(e.target.value))
     }
 
     onComplete(e){
-        console.log("VALUE " +e.target.value)
-        this.props.dispatch(complete(e.target.value))
+        this.props.dispatch(complete())
+        // console.log(e.target.value)
+    }
+
+    onStrike(e){
+        this.props.dispatch(strike(e.target.innerHTML))
     }
 
     render() {
         return <div>
-            <input type="text" value = {this.props.update} onChange={this.update.bind(this)} />
-            <button onClick={this.onAdd.bind(this)}>Add</button>
-            <button onClick={this.onFilter.bind(this)}>Delete</button>
-            <ul >{this.props.addItems.map((addItem) => {
-                return <p onClick={this.props.addItem} key={addItem} >
-                    <input type="checkbox" value= {addItem} onChange = {this.onComplete.bind(this)} /> {addItem} </p>
-            })}
+            <input type="text" id = "textfield" value={this.props.update} onChange={this.update.bind(this)} />
+            <button onClick={this.onAdd.bind(this)}>Add Task</button>
+            <button onClick={this.onComplete.bind(this)}>Delete Task</button>
+            
+            <ul>{this.props.addItems.map((Item) => 
+                {return <p key={Item.text}>
+                <input type = "checkbox" value = {Item.text} onChange = {this.changeStatus.bind(this)}/>
+                <span  onClick = {this.onStrike.bind(this)}>{Item.text}</span></p>})}
             </ul>
         </div>
     }
