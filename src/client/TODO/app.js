@@ -10,7 +10,7 @@ const mapStateToProps = function (state) {
         addItems: state.Items,
         change: state.complete,
         status: state.status,
-        text: state.text,
+        // text: state.text,
 
     }
 }
@@ -41,6 +41,10 @@ class App extends React.Component {
         this.props.dispatch(strike())
     }
 
+    // onDelete(e){
+    //     console.log("IDDDD " +e.target.value)
+    // }
+
     onDelete(e){
         console.log("DELETE " +e.target.value)
         this.props.dispatch(del(e.target.value))
@@ -50,12 +54,11 @@ class App extends React.Component {
         return <div>
             <input type="text" id = "textfield" value={this.props.update} onChange={this.update.bind(this)} />
             <button onClick={this.onAdd.bind(this)}>Add Task</button>
-            
             <ul>{this.props.addItems.map((Item) => 
-                {return <p key={Item.text}>
+                {return <p key={Item.id}>
                 <input type = "checkbox" value = {Item.text} onChange = {this.changeStatus.bind(this)}/>
                 <span >{Item.text}</span>
-                <button value={Item.text} onClick={this.onDelete.bind(this)}>D</button></p> })}
+                <button value={Item.id} onClick={this.onDelete.bind(this)}>D</button></p> })}
             </ul>
         </div>
     }
