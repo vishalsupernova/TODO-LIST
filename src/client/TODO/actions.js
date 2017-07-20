@@ -1,7 +1,7 @@
 export const update = (value) => {
     return {
         type: 'UPDATE',
-        update: value, //eat
+        update: value, 
     }
 }
 

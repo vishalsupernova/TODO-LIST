@@ -10,11 +10,8 @@ const mapStateToProps = function (state) {
         addItems: state.Items,
         change: state.complete,
         status: state.status,
-        // text: state.text,
-
     }
 }
-
 
 class App extends React.Component {
 
@@ -41,10 +38,6 @@ class App extends React.Component {
         this.props.dispatch(strike())
     }
 
-    // onDelete(e){
-    //     console.log("IDDDD " +e.target.value)
-    // }
-
     onDelete(e){
         console.log("DELETE " +e.target.value)
         this.props.dispatch(del(e.target.value))
@@ -65,7 +58,6 @@ class App extends React.Component {
 }
 
 export default connect(mapStateToProps)(App)
-
 
 {/*<button onClick={this.onComplete.bind(this)}> */}
 

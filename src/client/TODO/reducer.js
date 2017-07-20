@@ -1,7 +1,6 @@
 const initialState = { update: '', Items: [], filters: [], id: 0 }
 
 function Todo(state = initialState, action) {
-    // console.log("ITEMSSS " + state.Items)
     let Items = []
     switch (action.type) {
         case 'UPDATE':
@@ -23,6 +22,7 @@ function Todo(state = initialState, action) {
         case "COMPLETE":
             Items = state.Items.filter((Item) => {return (Item.status === false)})
             return { ...state, Items: Items }
+            
         // case "STRIKE": 
         //     Items = state.Items.filter((Item) => { return(Item.status === true)})
         //     this.state.Items.splice()
