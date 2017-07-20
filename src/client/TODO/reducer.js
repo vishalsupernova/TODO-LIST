@@ -9,30 +9,28 @@ function Todo(state = initialState, action) {
         case 'ADD':
             console.log("add", action)
             Items = state.Items
-            Items.push({ text: action.add, status: false, strike: false })
+            Items.push({ text: action.add, status: false })
             console.log(Items)
             return { ...state, Items: Items, update: '' }
         case "CHANGESTATUS":
             Items = state.Items
-            Items.map((i) => {
-                if (i.text == action.changeStatus) {
-                    i.status = !i.status
+            Items.map((item) => {
+                if (item.text == action.changeStatus) {
+                    item.status = !item.status
                 }
             })
             return { ...state, Items: Items }
         case "COMPLETE":
-            Items = state.Items.filter((Item) => {
-                return (Item.status === false)
-            })
+            Items = state.Items.filter((Item) => {return (Item.status === false)})
             return { ...state, Items: Items }
-        case "STRIKE": 
-            Items = state.Items
-            Items.map((i) => {
-                if (i.text == action.strike) {
-                    i.strike = !i.strike
-                }
-            })
-            return { ...state, Items: Items }
+        // case "STRIKE": 
+        //     Items = state.Items.filter((Item) => { return(Item.status === true)})
+        //     this.state.Items.splice()
+        //     return{...state, Items: Items}
+
+        case "DELETE":
+            Items = state.Items.filter((Item) => {return (Item.text) != (action.delete)})
+            return{...state, Items: Items}
 
         default:
             return state

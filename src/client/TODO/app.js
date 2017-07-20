@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
-import { update, add, strike, complete, changeStatus } from './actions.js';
+import { update, add, strike, complete, changeStatus, del } from './actions.js';
 
 
 const mapStateToProps = function (state) {
@@ -32,27 +32,38 @@ class App extends React.Component {
     }
 
     onComplete(e){
+        console.log(" button" +e.target.innerHTML)
         this.props.dispatch(complete())
-        // console.log(e.target.value)
     }
 
     onStrike(e){
-        this.props.dispatch(strike(e.target.innerHTML))
+        // console.log(e.target.innerHTML)
+        this.props.dispatch(strike())
+    }
+
+    onDelete(e){
+        console.log("DELETE " +e.target.value)
+        this.props.dispatch(del(e.target.value))
     }
 
     render() {
         return <div>
             <input type="text" id = "textfield" value={this.props.update} onChange={this.update.bind(this)} />
             <button onClick={this.onAdd.bind(this)}>Add Task</button>
-            <button onClick={this.onComplete.bind(this)}>Delete Task</button>
             
             <ul>{this.props.addItems.map((Item) => 
                 {return <p key={Item.text}>
                 <input type = "checkbox" value = {Item.text} onChange = {this.changeStatus.bind(this)}/>
-                <span  onClick = {this.onStrike.bind(this)}>{Item.text}</span></p>})}
+                <span >{Item.text}</span>
+                <button value={Item.text} onClick={this.onDelete.bind(this)}>D</button></p> })}
             </ul>
         </div>
     }
 }
 
 export default connect(mapStateToProps)(App)
+
+
+{/*<button onClick={this.onComplete.bind(this)}> */}
+
+{/* <img height = "10px" width = "15px" src="C:\Users\vilakkapat\Downloads\delete.jpg" /> */}

@@ -26,12 +26,18 @@ export const complete = (status) => {
     }
 }
 
-export const strike = (value) => {
+export const strike = (status) => {
     return{
         type: "STRIKE",
-        strike: value 
-        
+        strike: status    
     }
 }
 
+export const del = (value) => {
+    console.log("ACTION " +value)
+    return{
+        type: "DELETE",
+        delete: value
+    }
+}
 
