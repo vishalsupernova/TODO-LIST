@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import { update, add, strike, complete, changeStatus, del } from './actions.js';
-
+import keypress from 'react-keypress';
 
 const mapStateToProps = function (state) {
     return {
@@ -16,10 +16,12 @@ const mapStateToProps = function (state) {
 class App extends React.Component {
 
     update(e) {
-        this.props.dispatch(update(e.target.value))
+           this.props.dispatch(update(e.target.value))   
     }
 
     onAdd(e) {
+        console.log("CODE" +e.keyCode)
+        if(e.keyCode ==13)
         this.props.dispatch(add(this.props.update))
     }
 
@@ -45,8 +47,9 @@ class App extends React.Component {
 
     render() {
         return <div>
-            <input type="text" id = "textfield" value={this.props.update} onChange={this.update.bind(this)} />
-            <button onClick={this.onAdd.bind(this)}>Add Task</button>
+            <input type="text" id = "textfield" value={this.props.update} 
+            onKeyDown={this.onAdd.bind(this)} onChange={this.update.bind(this) } placeholder = "Please Enter" />
+            
             <ul>{this.props.addItems.map((Item) => 
                 {return <p key={Item.id}>
                 <input type = "checkbox" value = {Item.text} onChange = {this.changeStatus.bind(this)}/>
@@ -58,6 +61,8 @@ class App extends React.Component {
 }
 
 export default connect(mapStateToProps)(App)
+
+{/* <button onClick={this.onAdd.bind(this)}>Add Task</button> */}
 
 {/*<button onClick={this.onComplete.bind(this)}> */}
 
