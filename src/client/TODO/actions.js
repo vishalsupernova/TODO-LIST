@@ -34,10 +34,25 @@ export const strike = (status) => {
 }
 
 export const del = (value) => {
-    console.log("ACTION " +value)
     return{
         type: "DELETE",
         delete: value
     }
 }
+
+export const double = (id) => {
+    return{
+        type: "DOUBLE",
+        double: id
+    }
+}
+
+export const edit = (id, value) => {
+    return{
+        type: "EDIT",
+        id: id,
+        value: value
+    }
+}
+
 
